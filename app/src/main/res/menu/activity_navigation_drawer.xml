@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/request_help"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Request Help" />
+        <item
+            android:id="@+id/volunteer"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Volunteer" />
+        <item
+            android:id="@+id/shelters"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Shelters" />
+        <item
+            android:id="@+id/find_victim"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Find a Victim" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/live_updates"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Live Updates" />
+            <item
+                android:id="@+id/profile"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Profile" />
+            <item
+                android:id="@+id/helpline_tips"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Helpline and Tips" />
+            <item
+                android:id="@+id/faq"
+                android:icon="@drawable/ic_menu_share"
+                android:title="FAQ" />
+            <item
+                android:id="@+id/contact"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Contact Us" />
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/ic_menu_send"
+                android:title="About" />
+        </menu>
+    </item>
+
+</menu>

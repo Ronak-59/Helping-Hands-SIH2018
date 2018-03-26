@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--This TextView holds the weather data for one particular day in the forecast
+
+    This View serves as a visual divider between list items-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/recycler_detail"
+            >
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/user" />
+            <TextView
+                android:id="@+id/tv_shelter_data"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="8dp"
+                android:text="Form Title"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+        <!--<View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="#9b9b9b"
+            android:layout_below="@id/recycler_detail"
+            />-->
+
+
+
+</RelativeLayout>

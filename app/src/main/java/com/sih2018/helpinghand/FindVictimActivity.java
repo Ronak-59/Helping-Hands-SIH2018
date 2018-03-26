@@ -1,27 +1,21 @@
-package com.sih2018.helpinghand.Fragments;
+package com.sih2018.helpinghand;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sih2018.helpinghand.FindVictimActivity;
-import com.sih2018.helpinghand.R;
-import com.sih2018.helpinghand.VictimAdapter;
 import com.sih2018.helpinghand.data.HttpHandler;
 
 import org.json.JSONArray;
@@ -31,9 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-public class FindVictimFragment extends Fragment implements VictimAdapter.VictimAdapterOnClickHandler {
-
+public class FindVictimActivity extends AppCompatActivity implements VictimAdapter.VictimAdapterOnClickHandler {
     private TextView mErrorMessageDisplay;
     private ProgressBar mLoadingIndicator;
 
@@ -48,43 +40,20 @@ public class FindVictimFragment extends Fragment implements VictimAdapter.Victim
     private String headurl = "http://";
     String ipadd;
     ArrayList<HashMap<String, String>> shelterList;
-
-
-    private OnFragmentInteractionListener mListener;
-
-    public FindVictimFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static FindVictimFragment newInstance(String param1, String param2) {
-        FindVictimFragment fragment = new FindVictimFragment();
-        return fragment;
-    }
-
+    
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
-
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View fragview = inflater.inflate(R.layout.fragment_find_victim, container, false);
-
+        setContentView(R.layout.fragment_find_victim);
         shelterList = new ArrayList<>();
-        mRecyclerView = (RecyclerView) fragview.findViewById(R.id.recycler_shelter);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_shelter);
         /* This TextView is used to display errors and will be hidden if there are no errors */
-        mErrorMessageDisplay = (TextView) fragview.findViewById(R.id.error_mess);
-        mLoadingIndicator = (ProgressBar) fragview.findViewById(R.id.loadbar);
-        mSearchField =(EditText)fragview.findViewById(R.id.search_field);
-        mResultCard=(CardView)fragview.findViewById(R.id.card_viewresult);
+        mErrorMessageDisplay = (TextView) findViewById(R.id.error_mess);
+        mLoadingIndicator = (ProgressBar) findViewById(R.id.loadbar);
+        mSearchField =(EditText)findViewById(R.id.search_field);
+        mResultCard=(CardView)findViewById(R.id.card_viewresult);
         LinearLayoutManager layoutManager
-                = new LinearLayoutManager(fragview.getContext(), LinearLayoutManager.VERTICAL, false);
+                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
         mRecyclerView.setLayoutManager(layoutManager);
 
@@ -96,12 +65,13 @@ public class FindVictimFragment extends Fragment implements VictimAdapter.Victim
         mRecyclerView.setAdapter(mVictimAdapter);
 
         mSearchField.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-                showShelterDataView();
-                Log.e("TestCode","Working");
-                if(mSearchField.getText().toString().length()>0)
-                    new GetVictim().execute(mSearchField.getText().toString());
-            }
+
+                    public void afterTextChanged(Editable s) {
+                        showShelterDataView();
+                        Log.e("TestCode","Working");
+                        if(mSearchField.getText().toString().length()>0)
+                        new GetVictim().execute(mSearchField.getText().toString());
+                    }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -110,23 +80,9 @@ public class FindVictimFragment extends Fragment implements VictimAdapter.Victim
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
-        return fragview;
+
+
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
 
     private void showShelterDataView() {
         /* First, make sure the error is invisible */
@@ -144,9 +100,9 @@ public class FindVictimFragment extends Fragment implements VictimAdapter.Victim
     }
 
     @Override
-    public void onClick(String ShelterData) {
-        Intent intentnext = new Intent(getActivity(), FindVictimActivity.class);
-        intentnext.putExtra("shelterdata",ShelterData);
+    public void onClick(String weatherForDay) {
+        Intent intentnext = new Intent(getApplicationContext(), FindVictimActivity.class);
+        intentnext.putExtra("formname",weatherForDay);
         startActivity(intentnext);
     }
 
@@ -163,7 +119,7 @@ public class FindVictimFragment extends Fragment implements VictimAdapter.Victim
 
         @Override
         protected Void doInBackground(String... strings) {
-            ipadd = getActivity().getResources().getString(R.string.ipadd);
+            ipadd = getApplicationContext().getResources().getString(R.string.ipadd);
             HttpHandler sh = new HttpHandler();
 
             url = "/HHAPI/select.php?search="+strings[0];
@@ -199,10 +155,10 @@ public class FindVictimFragment extends Fragment implements VictimAdapter.Victim
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(),
+                            Toast.makeText(getApplicationContext(),
                                     "Json parsing error: " + e.getMessage(),
                                     Toast.LENGTH_LONG)
                                     .show();

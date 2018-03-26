@@ -4,10 +4,22 @@
     android:layout_height="match_parent"
     tools:context="com.sih2018.helpinghand.Fragments.VolunteerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorAccent"
+            android:text="Be a Volunteer"
+            android:textColor="@color/white"
+            android:padding="10dp"/>
+
+
+
+    </RelativeLayout>
 
 </FrameLayout>

@@ -1,6 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -8,22 +7,41 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AuthBackground" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/login</item>
+    <style name="AuthBackground" parent="FirebaseUI">
+        <item name="android:windowBackground">@drawable/login_page_back</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
-        <item name="android:actionBarStyle">@style/FirebaseAuthActionBarStyle</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
     </style>
-    <style name="FirebaseAuthActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">#000072FF</item>
+
+    <style name="FirebaseUI.EditText" parent="FirebaseUI">
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="FirebaseUI.Text.TextInputLayout" parent="@style/FirebaseUI.EditText" />
+
+    <style name="FirebaseUI.Text.HintText" parent="@style/FirebaseUI.EditText" />
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -33,5 +51,8 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CalamityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
 
 </resources>

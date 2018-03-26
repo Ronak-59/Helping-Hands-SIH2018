@@ -15,11 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.sih2018.helpinghand.Fragments.AboutFragment;
 import com.sih2018.helpinghand.Fragments.ContactFragment;
 import com.sih2018.helpinghand.Fragments.FAQFragment;
@@ -35,6 +37,7 @@ import com.sih2018.helpinghand.Fragments.VolunteerFragment;
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,12 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            TextView textView=findViewById(R.id.maintextview);
+            textView.setText("user logged in"+auth.getCurrentUser().getEmail());
+        }
 
 
     }

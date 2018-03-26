@@ -1,19 +1,14 @@
-package com.sih2018.helpinghand.Fragments;
+package com.sih2018.helpinghand;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,9 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.sih2018.helpinghand.FindVictimActivity;
-import com.sih2018.helpinghand.NearShelterAdapter;
-import com.sih2018.helpinghand.R;
+import com.sih2018.helpinghand.Fragments.SheltersFragment;
 import com.sih2018.helpinghand.data.HttpHandler;
 
 import org.json.JSONArray;
@@ -38,19 +31,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SheltersFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SheltersFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SheltersFragment extends Fragment implements  NearShelterAdapter.NearShelterAdapterOnClickHandler {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SheltersActivity extends AppCompatActivity implements  NearShelterAdapter.NearShelterAdapterOnClickHandler {
     private TextView mErrorMessageDisplay;
     private ProgressBar mLoadingIndicator;
 
@@ -61,63 +42,26 @@ public class SheltersFragment extends Fragment implements  NearShelterAdapter.Ne
     private String TAG = FindVictimActivity.class.getSimpleName();
     private GetShelter mTask;
     // URL to get contacts JSON
-    private  String url = "/HHAPI/select2.php";
+    private String url = "/HHAPI/select2.php";
     private String headurl = "http://";
     String ipadd;
     ArrayList<HashMap<String, String>> shelterList;
-    String [][]shelterdet = new String[10][3];
+    String[][] shelterdet = new String[10][3];
     private GoogleMap map;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public SheltersFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SheltersFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SheltersFragment newInstance(String param1, String param2) {
-        SheltersFragment fragment = new SheltersFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_shelters, null, false);
+        setContentView(R.layout.fragment_shelters);
         shelterList = new ArrayList<>();
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_shelter);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_shelter);
         /* This TextView is used to display errors and will be hidden if there are no errors */
-        mErrorMessageDisplay = (TextView) view.findViewById(R.id.error_mess);
-        mLoadingIndicator = (ProgressBar) view.findViewById(R.id.loadbar);
-        mSearchField =(EditText)view.findViewById(R.id.search_field);
-        mResultCard=(CardView)view.findViewById(R.id.card_viewresult);
+        mErrorMessageDisplay = (TextView) findViewById(R.id.error_mess);
+        mLoadingIndicator = (ProgressBar) findViewById(R.id.loadbar);
+        mSearchField = (EditText) findViewById(R.id.search_field);
+        mResultCard = (CardView) findViewById(R.id.card_viewresult);
         LinearLayoutManager layoutManager
-                = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
+                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
         mRecyclerView.setLayoutManager(layoutManager);
 
@@ -128,25 +72,6 @@ public class SheltersFragment extends Fragment implements  NearShelterAdapter.Ne
         mRecyclerView.setAdapter(mNearShelterAdapter);
         showShelterDataView();
         new GetShelter().execute("nostring");
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     private void showShelterDataView() {
@@ -166,10 +91,11 @@ public class SheltersFragment extends Fragment implements  NearShelterAdapter.Ne
 
     @Override
     public void onClick(String ProfileData) {
-        Intent intentnext = new Intent(getActivity(), FindVictimActivity.class);
+        Intent intentnext = new Intent(this, FindVictimActivity.class);
         intentnext.putExtra("username",ProfileData);
         startActivity(intentnext);
     }
+
 
     private class GetShelter extends AsyncTask<String, Void, Void> implements OnMapReadyCallback {
 
@@ -182,13 +108,13 @@ public class SheltersFragment extends Fragment implements  NearShelterAdapter.Ne
 
         @Override
         protected Void doInBackground(String... strings) {
-            ipadd = getActivity().getResources().getString(R.string.ipadd);
+            ipadd = getResources().getString(R.string.ipadd);
             HttpHandler sh = new HttpHandler();
 
             url = "/HHAPI/select2.php";
             headurl = "http://";
-            url=headurl+ipadd+url;
-            Log.e("url",url);
+            url = headurl + ipadd + url;
+            Log.e("url", url);
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url);
 
@@ -217,24 +143,21 @@ public class SheltersFragment extends Fragment implements  NearShelterAdapter.Ne
                         // adding contact to contact list
 
                         shelterList.add(shelname);
-                        shelterdet[i][0]=name;
-                        shelterdet[i][1]=lati;
-                        shelterdet[i][2]=longi;
+                        shelterdet[i][0] = name;
+                        shelterdet[i][1] = lati;
+                        shelterdet[i][2] = longi;
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
+                            Toast.makeText(getApplicationContext(), "Json parsing error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
                 }
-                Log.e("set","yes");
+                Log.e("set", "yes");
 
 
             } else {
@@ -271,7 +194,7 @@ public class SheltersFragment extends Fragment implements  NearShelterAdapter.Ne
                     R.id.email, R.id.mobile});
 
             lv.setAdapter(adapter);*/
-            if(shelterList.size()>0) {
+            if (shelterList.size() > 0) {
                 HashMap<String, String> m = shelterList.get(0);
                 String strArr[] = new String[shelterList.size() * m.size()];
                 int i = 0;
@@ -282,10 +205,10 @@ public class SheltersFragment extends Fragment implements  NearShelterAdapter.Ne
                     }
                 }
                 mNearShelterAdapter.setShelterData(strArr);
-            }else {
+            } else {
                 showErrorMessage();
             }
-            SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
         }
 
@@ -298,17 +221,18 @@ public class SheltersFragment extends Fragment implements  NearShelterAdapter.Ne
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
             }
-            LatLng sheltermark= new LatLng(26.2006,92.9376);
-            Log.e("call",String.valueOf(shelterdet.length));
-            if(shelterdet.length>0) {
-                for (int i=0;i<shelterdet.length;i++) {
-                    Log.e("name","N-"+shelterdet[i][0]);
-                    sheltermark = new LatLng(Double.parseDouble(shelterdet[i][2]),Double.parseDouble(shelterdet[i][1]));
+            LatLng sheltermark = new LatLng(26.2006, 92.9376);
+            Log.e("call", String.valueOf(shelterdet.length));
+            if (shelterdet.length > 0) {
+                for (int i = 0; i < shelterdet.length; i++) {
+                    Log.e("name", "N-" + shelterdet[i][0]);
+                    sheltermark = new LatLng(Double.parseDouble(shelterdet[i][2]), Double.parseDouble(shelterdet[i][1]));
                     map.addMarker(new MarkerOptions().position(sheltermark).title(shelterdet[i][0]));
                 }
             }
             map.moveCamera(CameraUpdateFactory.newLatLng(sheltermark));
-            map.animateCamera( CameraUpdateFactory.zoomTo( 8.0f ) );
+            map.animateCamera(CameraUpdateFactory.zoomTo(8.0f));
         }
     }
+
 }

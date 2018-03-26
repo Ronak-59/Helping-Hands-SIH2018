@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <include
+        android:id="@+id/photoHeader"
+        layout="@layout/photo_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/relativeLayout"
+        app:layout_anchorGravity="top|center"
+        android:elevation="3dp"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
+        android:paddingBottom="16dp"
+        android:elevation="1dp"
+        android:background="@drawable/profile_background">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="68dp"
+            android:layout_marginBottom="8dp"
+            android:text="Marian Hart"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif"/>
+
+        <TextView
+            android:id="@+id/tvemail"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tvName"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:lines="2"
+            android:text="mhapsekarmandar@live.com"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <TextView
+            android:id="@+id/tvgender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tvemail"
+            android:layout_marginBottom="4dp"
+            android:text="Gender: Male"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"/>
+
+        <TextView
+            android:id="@+id/tvage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tvgender"
+            android:layout_marginBottom="16dp"
+            android:text="Age: 20"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"/>
+
+        <Space
+            android:id="@+id/spaceHolder"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/tvgender"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/btnMessage"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@id/spaceHolder"
+            android:layout_toStartOf="@id/spaceHolder"
+            android:layout_below="@id/tvage"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            android:text="message"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <Button
+            android:id="@+id/btnContact"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/spaceHolder"
+            android:layout_toEndOf="@id/spaceHolder"
+            android:layout_below="@id/tvage"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:text="Contact"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <ImageView
+            android:id="@+id/ivqr"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btnMessage"
+            android:gravity="center"
+            android:src="@drawable/qr"/>
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

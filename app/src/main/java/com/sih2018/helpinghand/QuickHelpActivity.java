@@ -1,10 +1,16 @@
 package com.sih2018.helpinghand;
 
+import android.app.ActionBar;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.sih2018.helpinghand.Fragments.FindVictimFragment;
 import com.sih2018.helpinghand.Fragments.RequestHelpFragment;
@@ -22,6 +28,7 @@ public class QuickHelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_help);
+
 
         RequestHelp = findViewById(R.id.requesthelp);
         FindShelter = findViewById(R.id.findshelter);
@@ -41,21 +48,13 @@ public class QuickHelpActivity extends AppCompatActivity {
         FindShelter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SheltersFragment fragment = new SheltersFragment();
-                FragmentTransaction fragmentTransaction =
-                        getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.commit();
+                startActivity(new Intent(QuickHelpActivity.this,SheltersActivity.class));
             }
         });
         FindSomeone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FindVictimFragment fragment = new FindVictimFragment();
-                FragmentTransaction fragmentTransaction =
-                        getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.commit();
+                startActivity(new Intent(QuickHelpActivity.this,FindVictimActivity.class));
             }
         });
         BeVolunteer.setOnClickListener(new View.OnClickListener() {
@@ -69,4 +68,7 @@ public class QuickHelpActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 }

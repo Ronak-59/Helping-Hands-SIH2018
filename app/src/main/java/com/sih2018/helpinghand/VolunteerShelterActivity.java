@@ -46,6 +46,7 @@ public class VolunteerShelterActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Represents an asynchronous login/registration task used to Register
      * the user.
@@ -162,6 +163,7 @@ public class VolunteerShelterActivity extends AppCompatActivity {
                         .show();
             }
         }
+
 
         @Override
         protected void onCancelled() {

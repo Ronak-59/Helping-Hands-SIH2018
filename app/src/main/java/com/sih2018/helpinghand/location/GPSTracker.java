@@ -10,6 +10,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -18,7 +19,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
+
+
 
 import com.sih2018.helpinghand.R;
 
@@ -62,6 +68,9 @@ public class GPSTracker extends Service implements LocationListener {
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
+
+
+
     // Store LocationManager.GPS_PROVIDER or LocationManager.NETWORK_PROVIDER information
     private String provider_info;
 
@@ -98,6 +107,7 @@ public class GPSTracker extends Service implements LocationListener {
                  */
 
                 provider_info = LocationManager.GPS_PROVIDER;
+                Log.d("locationerror4",provider_info);
 
             } else if (isNetworkEnabled) { // Try to get location if you Network Service is enabled
                 this.isGPSTrackingEnabled = true;
@@ -110,20 +120,26 @@ public class GPSTracker extends Service implements LocationListener {
                  * by means of a network lookup.
                  */
                 provider_info = LocationManager.NETWORK_PROVIDER;
+                Log.d("locationerror3",provider_info);
+
 
             }
 
             // Application can use GPS or Network Provider
             if (!provider_info.isEmpty()) {
+
                 locationManager.requestLocationUpdates(
                         provider_info,
                         MIN_TIME_BW_UPDATES,
                         MIN_DISTANCE_CHANGE_FOR_UPDATES,
                         this
                 );
+                Log.d("locationerror5",locationManager.toString());
 
                 if (locationManager != null) {
-                    location = locationManager.getLastKnownLocation(provider_info);
+                    Log.d("locationerror7",locationManager.toString());
+                    location = getLastKnownLocation2();
+                    Log.d("locationerror6",location.toString());
                     updateGPSCoordinates();
                 }
             }
@@ -131,7 +147,7 @@ public class GPSTracker extends Service implements LocationListener {
         catch (Exception e)
         {
             //e.printStackTrace();
-            Log.e(TAG, "Impossible to connect to LocationManager", e);
+            Log.e(TAG, "Unable to connect to LocationManager", e);
         }
     }
 
@@ -139,7 +155,9 @@ public class GPSTracker extends Service implements LocationListener {
      * Update GPSTracker latitude and longitude
      */
     public void updateGPSCoordinates() {
+        Log.d("locationerror2.0",location.toString());
         if (location != null) {
+            Log.d("locationerror2",location.toString());
             latitude = location.getLatitude();
             longitude = location.getLongitude();
         }
@@ -317,7 +335,28 @@ public class GPSTracker extends Service implements LocationListener {
             return null;
         }
     }
-
+    private Location getLastKnownLocation2() {
+        locationManager = (LocationManager)mContext.getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            try {
+                Location l = locationManager.getLastKnownLocation(provider);
+                if (l == null) {
+                    continue;
+                }
+                if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                    // Found best last known location: %s", l);
+                    bestLocation = l;
+                }
+            }
+            catch (SecurityException se){
+                Toast.makeText(mContext, "Error fetching location", Toast.LENGTH_SHORT).show();
+            }
+        }
+        Log.d("locationerror10",bestLocation.toString());
+        return bestLocation;
+    }
     @Override
     public void onLocationChanged(Location location) {
     }

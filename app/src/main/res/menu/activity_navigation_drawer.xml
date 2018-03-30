@@ -6,23 +6,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/request_help"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_action_name"
             android:title="Request Help" />
         <item
             android:id="@+id/volunteer"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_vol"
             android:title="Volunteer" />
         <item
             android:id="@+id/shelters"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home"
             android:title="Shelters" />
         <item
             android:id="@+id/find_victim"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_find"
             android:title="Find a Victim" />
         <item
             android:id="@+id/transport"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_transport"
             android:title="Find a Transport" />
     </group>
 
@@ -34,11 +34,11 @@
                 android:title="Live Updates" />
             <item
                 android:id="@+id/profile"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_user"
                 android:title="Profile" />
             <item
                 android:id="@+id/helpline_tips"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_help"
                 android:title="Helpline and Tips" />
             <item
                 android:id="@+id/faq"
@@ -46,7 +46,7 @@
                 android:title="FAQ" />
             <item
                 android:id="@+id/contact"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_contact"
                 android:title="Contact Us" />
             <item
                 android:id="@+id/about"

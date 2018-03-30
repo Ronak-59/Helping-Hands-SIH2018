@@ -8,7 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="ipadd">192.168.1.104</string>
+    <string name="ipadd">192.168.43.228</string>
     <string name="google_maps_key">AIzaSyC0pKg_2LUaMF-IDklGCa3l4LLopDIKZws</string>
     <string name="style_json">
       [

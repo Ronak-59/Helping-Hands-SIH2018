@@ -118,36 +118,36 @@ public class SheltersActivity extends AppCompatActivity implements  NearShelterA
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url);
 
-            Log.e(TAG, "Response from url: " + jsonStr); //The Output of First Page
+           Log.e(TAG, "Response from url: " + jsonStr); //The Output of First Page
 
             if (jsonStr != null) {
                 try {
 
-                    // Getting JSON Array node
                     JSONArray names = new JSONArray(jsonStr);
                     shelterList.clear();
-                    // looping through All Contacts
-                    for (int i = 0; i < names.length(); i++) {
-                        JSONObject c = names.getJSONObject(i);
+                        // looping through All Contacts
+                        for (int j = 0; j < names.length(); j++) {
 
-                        String name = c.getString("name");
-                        String lati = c.getString("lati");
-                        String longi = c.getString("longi");
+                            JSONObject idjsonobj = names.getJSONObject(j);
+                            String name = idjsonobj.getString("name");
+                            String lati = idjsonobj.getString("lati");
+                            String longi = idjsonobj.getString("longi");
 
-                        // tmp hash map for single contact
-                        HashMap<String, String> shelname = new HashMap<>();
+                            // tmp hash map for single contact
+                            HashMap<String, String> shelname = new HashMap<>();
 
-                        // adding each child node to HashMap key => value\
-                        shelname.put("name", name);
-                        //Log.e("Names",contact.get("name").toString());
-                        // adding contact to contact list
+                            // adding each child node to HashMap key => value\
+                            shelname.put("name", name);
+                            //Log.e("Names",contact.get("name").toString());
+                            // adding contact to contact list
 
-                        shelterList.add(shelname);
-                        shelterdet[i][0] = name;
-                        shelterdet[i][1] = lati;
-                        shelterdet[i][2] = longi;
-                    }
-                } catch (final JSONException e) {
+                            shelterList.add(shelname);
+                            shelterdet[j][0] = name;
+                            shelterdet[j][1] = lati;
+                            shelterdet[j][2] = longi;
+                        }
+
+            } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override

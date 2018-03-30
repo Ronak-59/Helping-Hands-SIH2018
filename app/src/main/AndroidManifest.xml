@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sih2018.helpinghand">
-
     //Getting Current Location
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     //Internet Permission
@@ -43,14 +42,14 @@
             android:theme="@style/CalamityTheme" />
         <activity
             android:name=".FindVictimActivity"
-            android:theme="@style/CalamityTheme"></activity>
+            android:theme="@style/CalamityTheme" />
         <activity
             android:name=".SheltersActivity"
-            android:theme="@style/CalamityTheme"></activity>
+            android:theme="@style/CalamityTheme" />
         <activity
             android:name=".RegisterActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".TransportActivity"></activity>
     </application>
 
 </manifest>

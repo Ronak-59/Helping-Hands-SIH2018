@@ -19,7 +19,7 @@ public class NearShelterAdapter extends RecyclerView.Adapter<NearShelterAdapter.
     private final NearShelterAdapter.NearShelterAdapterOnClickHandler mClickHandler;
 
     public interface NearShelterAdapterOnClickHandler {
-        void onClick(String weatherForDay);
+        void onClick(String shelterdata);
     }
 
     public NearShelterAdapter(NearShelterAdapter.NearShelterAdapterOnClickHandler clickHandler) {
@@ -39,8 +39,8 @@ public class NearShelterAdapter extends RecyclerView.Adapter<NearShelterAdapter.
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            String weatherForDay = mShelterData[adapterPosition];
-            mClickHandler.onClick(weatherForDay);
+            String shelterdata = mShelterData[adapterPosition];
+            mClickHandler.onClick(shelterdata);
         }
     }
 
@@ -59,8 +59,8 @@ public class NearShelterAdapter extends RecyclerView.Adapter<NearShelterAdapter.
 
     @Override
     public void onBindViewHolder(NearShelterAdapter.NearShelterAdapterViewHolder nearShelterAdapterViewHolder, int position) {
-        String weatherForThisDay = mShelterData[position];
-        nearShelterAdapterViewHolder.mShelterTextView.setText(weatherForThisDay);
+        String shelterdata = mShelterData[position];
+        nearShelterAdapterViewHolder.mShelterTextView.setText(shelterdata);
     }
 
 

@@ -20,6 +20,10 @@
             android:id="@+id/find_victim"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Find a Victim" />
+        <item
+            android:id="@+id/transport"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Find a Transport" />
     </group>
 
     <item android:title="Communicate">

@@ -19,7 +19,7 @@ public class VictimAdapter extends RecyclerView.Adapter<VictimAdapter.VictimAdap
     private final VictimAdapterOnClickHandler mClickHandler;
 
     public interface VictimAdapterOnClickHandler {
-        void onClick(String weatherForDay);
+        void onClick(String victimdata);
     }
 
     public VictimAdapter(VictimAdapterOnClickHandler clickHandler) {
@@ -39,8 +39,8 @@ public class VictimAdapter extends RecyclerView.Adapter<VictimAdapter.VictimAdap
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            String weatherForDay = mShelterData[adapterPosition];
-            mClickHandler.onClick(weatherForDay);
+            String victimdata = mShelterData[adapterPosition];
+            mClickHandler.onClick(victimdata);
         }
     }
 
@@ -48,7 +48,7 @@ public class VictimAdapter extends RecyclerView.Adapter<VictimAdapter.VictimAdap
     @Override
     public VictimAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        int layoutIdForListItem = R.layout.shelter_list;
+        int layoutIdForListItem = R.layout.user_list;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
@@ -59,8 +59,8 @@ public class VictimAdapter extends RecyclerView.Adapter<VictimAdapter.VictimAdap
 
     @Override
     public void onBindViewHolder(VictimAdapterViewHolder VictimAdapterViewHolder, int position) {
-        String weatherForThisDay = mShelterData[position];
-        VictimAdapterViewHolder.mShelterTextView.setText(weatherForThisDay);
+        String victimdata = mShelterData[position];
+        VictimAdapterViewHolder.mShelterTextView.setText(victimdata);
     }
 
 

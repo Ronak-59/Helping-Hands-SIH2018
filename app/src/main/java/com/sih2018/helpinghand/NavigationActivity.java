@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -32,6 +33,7 @@ import com.sih2018.helpinghand.Fragments.NotificationFragment;
 import com.sih2018.helpinghand.Fragments.ProfileFragment;
 import com.sih2018.helpinghand.Fragments.RequestHelpFragment;
 import com.sih2018.helpinghand.Fragments.SheltersFragment;
+import com.sih2018.helpinghand.Fragments.TransportFragment;
 import com.sih2018.helpinghand.Fragments.VolunteerFragment;
 
 public class NavigationActivity extends AppCompatActivity
@@ -73,8 +75,7 @@ public class NavigationActivity extends AppCompatActivity
 
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
-            TextView textView=findViewById(R.id.maintextview);
-            textView.setText("user logged in"+auth.getCurrentUser().getEmail());
+            Log.e("LoginStatus","Success");
         }
 
 
@@ -228,7 +229,15 @@ public class NavigationActivity extends AppCompatActivity
             toolbar.setTitle("Notifications");
 
         }
+        else if (id == R.id.transport) {
+            TransportFragment fragment = new TransportFragment();
+            FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            toolbar.setTitle("Transportation");
 
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

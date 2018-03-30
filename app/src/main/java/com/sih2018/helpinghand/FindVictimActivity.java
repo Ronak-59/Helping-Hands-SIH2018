@@ -11,7 +11,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FindVictimActivity extends AppCompatActivity implements VictimAdapter.VictimAdapterOnClickHandler {
+public class FindVictimActivity extends AppCompatActivity implements VictimAdapter.VictimAdapterOnClickHandler, View.OnClickListener {
     private TextView mErrorMessageDisplay;
     private ProgressBar mLoadingIndicator;
 
@@ -40,7 +42,7 @@ public class FindVictimActivity extends AppCompatActivity implements VictimAdapt
     private String headurl = "http://";
     String ipadd;
     ArrayList<HashMap<String, String>> shelterList;
-    
+    Button imgup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,17 @@ public class FindVictimActivity extends AppCompatActivity implements VictimAdapt
         mLoadingIndicator = (ProgressBar) findViewById(R.id.loadbar);
         mSearchField =(EditText)findViewById(R.id.search_field);
         mResultCard=(CardView)findViewById(R.id.card_viewresult);
+        imgup = (Button) findViewById(R.id.imgup);
+
+        imgup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Clicked","Yes");
+                Intent intentnext = new Intent(FindVictimActivity.this, UploadActivity.class);
+                startActivity(intentnext);
+            }
+        });
+
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -104,6 +117,11 @@ public class FindVictimActivity extends AppCompatActivity implements VictimAdapt
         Intent intentnext = new Intent(getApplicationContext(), FindVictimActivity.class);
         intentnext.putExtra("formname",weatherForDay);
         startActivity(intentnext);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     private class GetVictim extends AsyncTask<String, Void, Void> {

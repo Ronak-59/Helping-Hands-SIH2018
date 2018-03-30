@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.sih2018.helpinghand.FindVictimActivity;
 import com.sih2018.helpinghand.R;
+import com.sih2018.helpinghand.UploadActivity;
 import com.sih2018.helpinghand.VictimAdapter;
 import com.sih2018.helpinghand.data.HttpHandler;
 
@@ -89,6 +91,16 @@ public class FindVictimFragment extends Fragment implements VictimAdapter.Victim
         mRecyclerView.setLayoutManager(layoutManager);
 
         mRecyclerView.setHasFixedSize(true);
+        Button imgup = (Button) fragview.findViewById(R.id.imgup);
+
+        imgup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Clicked","Yes");
+                Intent intentnext = new Intent(getActivity(), UploadActivity.class);
+                startActivity(intentnext);
+            }
+        });
 
 
         mVictimAdapter = new VictimAdapter(this);

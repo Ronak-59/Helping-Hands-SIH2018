@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     //Internet Permission
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -54,7 +54,7 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".TransportActivity"></activity>
->>>>>>> b6574d8350c4f854c0149b044826a51b3ada6976
+        <activity android:name=".UploadActivity"></activity>
     </application>
 
 </manifest>

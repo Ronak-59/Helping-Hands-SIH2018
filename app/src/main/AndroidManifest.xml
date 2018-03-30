@@ -50,7 +50,11 @@
             android:name=".RegisterActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".VolunteerShelterActivity" />
-        <activity android:name=".VolTransportActivity"></activity>
+        <activity android:name=".VolTransportActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".TransportActivity"></activity>
+>>>>>>> b6574d8350c4f854c0149b044826a51b3ada6976
     </application>
 
 </manifest>

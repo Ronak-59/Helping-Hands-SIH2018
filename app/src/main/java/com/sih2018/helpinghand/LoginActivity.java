@@ -134,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             Toast.makeText(getApplicationContext(),
                                     "Please enter your Mobile No",
-
                                     Toast.LENGTH_LONG)
                                     .show();
                         }

@@ -72,10 +72,7 @@ public class NavigationActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null) {
-            TextView textView=findViewById(R.id.maintextview);
-            textView.setText("user logged in"+auth.getCurrentUser().getEmail());
-        }
+
 
 
     }

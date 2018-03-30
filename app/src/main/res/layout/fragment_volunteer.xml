@@ -1,25 +1,51 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sih2018.helpinghand.Fragments.VolunteerFragment">
+    android:layout_margin="16dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <Switch
+        android:id="@+id/switchButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:text="Be a Volunteer"
+        android:layout_marginTop="50dp"
+        android:textSize="18dp" />
+
+    <LinearLayout
+        android:id="@+id/volunteerBtns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:orientation="vertical">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:id="@+id/provideShelter"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:background="@color/colorAccent"
-            android:text="Be a Volunteer"
-            android:textColor="@color/white"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:text="Provide Shelter"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/provideTransport"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="Provide Transportation"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
 
-
-    </RelativeLayout>
-
-</FrameLayout>
+</LinearLayout>

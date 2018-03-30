@@ -1,21 +1,37 @@
 package com.sih2018.helpinghand;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sih2018.helpinghand.Fragments.FindVictimFragment;
 import com.sih2018.helpinghand.Fragments.RequestHelpFragment;
 import com.sih2018.helpinghand.Fragments.SheltersFragment;
 import com.sih2018.helpinghand.Fragments.VolunteerFragment;
+import com.sih2018.helpinghand.data.HttpHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.sih2018.helpinghand.Fragments.VolunteerFragment.MyPREFERENCES;
 
 public class QuickHelpActivity extends AppCompatActivity {
 
@@ -23,6 +39,8 @@ public class QuickHelpActivity extends AppCompatActivity {
     ImageView FindShelter;
     ImageView FindSomeone;
     ImageView BeVolunteer;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +52,12 @@ public class QuickHelpActivity extends AppCompatActivity {
         FindShelter = findViewById(R.id.findshelter);
         FindSomeone = findViewById(R.id.findsomeone);
         BeVolunteer = findViewById(R.id.bevolunteer);
+        sharedPreferences=getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        String mPhone=null;
+        if(sharedPreferences.contains("Quick"))
+        {
+            mPhone=sharedPreferences.getString("Quick",null);
+        }
 
         RequestHelp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +91,15 @@ public class QuickHelpActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         });
+
+       TextView tvMobileno=findViewById(R.id.mobileno);
+       tvMobileno.setText(mPhone);
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+    }
 
 }

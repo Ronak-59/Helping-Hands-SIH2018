@@ -3,6 +3,7 @@ package com.sih2018.helpinghand.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -131,6 +132,8 @@ public class VolunteerFragment extends Fragment {
             }
         }
 
+
+
         //Switch Change Listener
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -156,16 +159,35 @@ public class VolunteerFragment extends Fragment {
         Button mShelterBtn=view.findViewById(R.id.provideShelter);
         Button mTransportBtn=view.findViewById(R.id.provideTransport);
 
+        if(sharedpreferences.contains("shelter")) {
+            if (sharedpreferences.getBoolean("shelter",false))
+            {
+                mShelterBtn.setText("Check your Shelter");
+                mShelterBtn.setBackgroundColor(Color.rgb(0,128,0));
+            }
+        }
+
         mShelterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(sharedpreferences.contains("shelter")) {
+                    if (sharedpreferences.getBoolean("shelter",false))
+                    {
+                        startActivity(new Intent(getActivity(),VolunteerShelterActivity.class));
+                    }
+                }
+
                 //Create a dialog box
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
                 View mView = getLayoutInflater().inflate(R.layout.dialog_shelter_reg, null);
                 Button mDone = (Button) mView.findViewById(R.id.btnDone);
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
-                dialog.show();
+                if(!sharedpreferences.contains("shelter") || !sharedpreferences.getBoolean("shelter",false))
+                {
+                    dialog.show();
+                }
                 editText=mView.findViewById(R.id.shelter);
                 water=mView.findViewById(R.id.water);
                 food=mView.findViewById(R.id.food);
@@ -186,6 +208,8 @@ public class VolunteerFragment extends Fragment {
                         {
                             facilities=facilities+"Cloth";
                         }
+
+
                         auth = FirebaseAuth.getInstance();
                         mAuthTask = new UserLoginTask(auth.getCurrentUser().getEmail());
                         mAuthTask.execute((Void) null);
@@ -391,6 +415,10 @@ public class VolunteerFragment extends Fragment {
             mAuthTask = null;
 
             if (success) {
+
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putBoolean("shelter", true);
+                editor.commit();
                 //Already Registration done
                 startActivity(new Intent(getActivity(),VolunteerShelterActivity.class));
 

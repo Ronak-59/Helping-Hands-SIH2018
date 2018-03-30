@@ -2,6 +2,7 @@ package com.sih2018.helpinghand;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sih2018.helpinghand.data.HttpHandler;
 import com.sih2018.helpinghand.location.GPSTracker;
 
@@ -30,6 +32,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.sih2018.helpinghand.Fragments.VolunteerFragment.MyPREFERENCES;
+
 public class LoginActivity extends AppCompatActivity {
 
     Button QuickHelp;
@@ -37,6 +41,10 @@ public class LoginActivity extends AppCompatActivity {
     private UserLoginTask mAuthTask = null;
     EditText mPhone;
     GPSTracker gpsTracker;
+    private FirebaseAuth auth;
+    String gPhone;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,16 @@ public class LoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
+
+        sharedPreferences=getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this,NavigationActivity.class));
+        }
+        if(sharedPreferences.contains("Quick"))
+        {
+            startActivity(new Intent(LoginActivity.this,QuickHelpActivity.class));
+        }
 
         QuickHelp = findViewById(R.id.quick_help);
         Login = findViewById(R.id.login);
@@ -104,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         String phone=mPhone.getText().toString();
+                        gPhone=phone;
                         if(!phone.isEmpty())
                         {
                             //Starting the async task
@@ -229,6 +248,9 @@ public class LoginActivity extends AppCompatActivity {
             mAuthTask = null;
 
             if (success) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("Quick",gPhone);
+                editor.commit();
                 //if sucessful login then go to main activity
                 Intent intent = new Intent(getApplicationContext(), QuickHelpActivity.class);
                 intent.putExtra("JSONStr", jsonStr);

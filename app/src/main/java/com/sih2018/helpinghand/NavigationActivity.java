@@ -36,10 +36,13 @@ import com.sih2018.helpinghand.Fragments.SheltersFragment;
 import com.sih2018.helpinghand.Fragments.TransportFragment;
 import com.sih2018.helpinghand.Fragments.VolunteerFragment;
 
+import org.w3c.dom.Text;
+
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     private FirebaseAuth auth;
+    TextView tvProName,tvEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +76,15 @@ public class NavigationActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         auth = FirebaseAuth.getInstance();
+        tvProName=navigationView.getHeaderView(0).findViewById(R.id.proName);
+        tvEmail=navigationView.getHeaderView(0).findViewById(R.id.email);
+
 
         if (auth.getCurrentUser() != null) {
+            tvProName.setText(auth.getCurrentUser().getDisplayName());
+            tvEmail.setText(auth.getCurrentUser().getEmail());
             Log.e("LoginStatus","Success");
         }
 
@@ -92,12 +101,7 @@ public class NavigationActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+
     }
 
     @Override
@@ -243,4 +247,6 @@ public class NavigationActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

@@ -46,7 +46,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     private final int IMG_REQUEST=1;
     private Bitmap bitmap;
     GetRekogResult getRekogResult;
-    private String uploadUrl = "http://192.168.137.4/imager/updateinfo.php";
+    private String uploadUrl = "http://192.168.137.76/imager/updateinfo.php";
     private TextView mErrorMessageDisplay;
     private ProgressBar mLoadingIndicator;
     private  String url = "/imager/updateinfo.php";
@@ -222,6 +222,8 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            mLoadingIndicator.setVisibility(View.INVISIBLE);
+            showShelterDataView();
             if(result.equals("0")) {
                 simiresult.setText("No Match Found");
             }

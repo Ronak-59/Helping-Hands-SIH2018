@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.sih2018.helpinghand.R;
 
@@ -27,6 +30,7 @@ public class HelplineTipsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    WebView mWebView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +69,17 @@ public class HelplineTipsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_helpline_tips, container, false);
+        View v= inflater.inflate(R.layout.fragment_helpline_tips, container, false);
+        mWebView = (WebView) v.findViewById(R.id.webview);
+        mWebView.loadUrl("file:///android_asset/tips.html");
+
+        // Enable Javascript
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        // Force links and redirects to open in the WebView instead of in a browser
+        mWebView.setWebViewClient(new WebViewClient());
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

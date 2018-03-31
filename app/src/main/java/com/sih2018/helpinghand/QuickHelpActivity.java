@@ -19,10 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.sih2018.helpinghand.Fragments.FindVictimFragment;
-import com.sih2018.helpinghand.Fragments.RequestHelpFragment;
-import com.sih2018.helpinghand.Fragments.SheltersFragment;
-import com.sih2018.helpinghand.Fragments.VolunteerFragment;
+import com.sih2018.helpinghand.Fragments.*;
 import com.sih2018.helpinghand.data.HttpHandler;
 
 import org.json.JSONException;
@@ -62,11 +59,7 @@ public class QuickHelpActivity extends AppCompatActivity {
         RequestHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestHelpFragment fragment = new RequestHelpFragment();
-                FragmentTransaction fragmentTransaction =
-                        getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.commit();
+                startActivity(new Intent(QuickHelpActivity.this, TransportsActivity.class));
             }
         });
         FindShelter.setOnClickListener(new View.OnClickListener() {
@@ -84,16 +77,21 @@ public class QuickHelpActivity extends AppCompatActivity {
         BeVolunteer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VolunteerFragment fragment = new VolunteerFragment();
-                FragmentTransaction fragmentTransaction =
-                        getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.commit();
+                startActivity(new Intent(QuickHelpActivity.this,VolunteerActivity.class));
             }
         });
 
        TextView tvMobileno=findViewById(R.id.mobileno);
        tvMobileno.setText(mPhone);
+
+       TextView tvLogout=findViewById(R.id.logout);
+       tvLogout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               sharedPreferences.edit().remove("Quick").commit();
+               startActivity(new Intent(QuickHelpActivity.this,LoginActivity.class));
+           }
+       });
     }
 
 

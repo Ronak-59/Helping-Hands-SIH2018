@@ -28,7 +28,7 @@
                 />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
@@ -36,6 +36,18 @@
                 android:text="Calamity Mode"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:gravity="right"
+                android:text="Logout"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"></TextView>
+
         </android.support.v7.widget.Toolbar>
 
         <android.support.v7.widget.CardView

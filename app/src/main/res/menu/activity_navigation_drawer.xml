@@ -41,9 +41,9 @@
                 android:icon="@drawable/ic_help"
                 android:title="Helpline and Tips" />
             <item
-                android:id="@+id/faq"
+                android:id="@+id/ec"
                 android:icon="@drawable/ic_menu_share"
-                android:title="FAQ" />
+                android:title="Compliants" />
             <item
                 android:id="@+id/contact"
                 android:icon="@drawable/ic_contact"

@@ -57,7 +57,12 @@
         <activity android:name=".TransportActivity" />
         <activity android:name=".UploadActivity" />
         <activity android:name=".Fragments.VolunteerActivity" />
+<<<<<<< HEAD
         <activity android:name=".TransportsActivity"></activity>
+=======
+        <activity android:name=".TransportsActivity" />
+        <activity android:name=".Embankment"></activity>
+>>>>>>> 9a56d640d3cd6afceb099c038e75eadeff5b6dd6
     </application>
 
 </manifest>

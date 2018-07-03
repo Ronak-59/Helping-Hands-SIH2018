@@ -201,7 +201,7 @@ public class NavigationActivity extends AppCompatActivity
             fragmentTransaction.commit();
             toolbar.setTitle("Profile");
 
-        } else if (id == R.id.faq) {
+        } else if (id == R.id.ec) {
             FAQFragment fragment = new FAQFragment();
             FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();

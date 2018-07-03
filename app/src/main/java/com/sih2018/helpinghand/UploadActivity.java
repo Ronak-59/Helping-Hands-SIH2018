@@ -46,7 +46,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     private final int IMG_REQUEST=1;
     private Bitmap bitmap;
     GetRekogResult getRekogResult;
-    private String uploadUrl = "http://192.168.137.4/imager/updateinfo.php";
+    private String uploadUrl = "http://192.168.43.143/imager/updateinfo.php";
     private TextView mErrorMessageDisplay;
     private ProgressBar mLoadingIndicator;
     private  String url = "/imager/updateinfo.php";
@@ -173,14 +173,14 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    private class GetRekogResult extends AsyncTask<Void, Void, String> {
+    private class GetRekogResult extends AsyncTask<Void, Void, String[]> {
 
 
         @Override
-        protected String doInBackground(Void... voids) {
-            ipadd = getApplicationContext().getResources().getString(R.string.ipadd);
+        protected String[] doInBackground(Void... voids) {
+            ipadd = "192.168.43.143";
             HttpHandler sh = new HttpHandler();
-            String percent="0",id;
+            String percent[]=new String[2];
             url = "/imager/compare-faces.php";
             headurl = "http://";
             url=headurl+ipadd+url;
@@ -194,8 +194,8 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                 try {
                     // Getting JSON Array node
                     JSONObject obj = new JSONObject(jsonStr);
-                    percent=obj.getString("simi");
-                    id=obj.getString("tid");
+                    percent[0]=obj.getString("simi");
+                    percent[1]=obj.getString("tid");
 
                 } catch (final JSONException e) {
 
@@ -220,14 +220,17 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(String result[]) {
             super.onPostExecute(result);
-            if(result.equals("0")) {
+            mLoadingIndicator.setVisibility(View.INVISIBLE);
+            showShelterDataView();
+            if(result[0].equals("0")) {
                 simiresult.setText("No Match Found");
             }
             else {
-                simiresult.setText(result + "% Similarity | Shelter: Goreshwar High School");
+                simiresult.setText(result[0] + "% Similarity | Name: "+result[1]+" | Shelter: Goreshwar High School");
             }
+
         }
 
     }

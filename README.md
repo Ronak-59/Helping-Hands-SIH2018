@@ -61,13 +61,13 @@ Currently our prototype supports the following features:
 * Providing a system capable of allowing users to communicate using a Bluetooth based mesh network at a time of no cellular network availability.
 
 ## Credits:
-####Team SyncX:
+#### Team SyncX:
 * [Sanika Biwalkar](https://www.github.com/sanikabiwalkar)
 * [Prathamesh Mhapsekar](https://github.com/prathmesh36)
 * [Mandar Mhapsekar](https://github.com/mandar10)
 * [Raj Patel](https://www.github.com/Raj-7799)
 * [Aniket Mhatre](https://github.com/aniketmhatre88)
 * [Ronak Doshi](https://github.com/Ronak-59)
-####Mentors:
+#### Mentors:
 * [Sahil Mhapsekar](https://www.github.com/apherio)
 * Archana Nanade
